@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3ed">
+  <meta name="description" content="Enzo and Kat joyfully invite you to celebrate their wedding. View your invitation for all the details.">
+  <title>Enzo &amp; Kat — You're Invited</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f3ed;
+      --ink: #292a24;
+      --muted: #77776d;
+      --olive: #68705c;
+      --line: #dedbd2;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .topbar { height: 82px; display: flex; align-items: center; justify-content: center; padding: 14px 24px; }
+    .topbar img { display: block; width: 106px; height: 54px; object-fit: contain; mix-blend-mode: multiply; }
+    .hero { min-height: min(690px, calc(100svh - 82px)); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .hero-copy { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 70px clamp(28px, 7vw, 110px); }
+    .eyebrow { margin: 0 0 24px; color: var(--olive); font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+    h1 { margin: 0; font-family: var(--serif); font-size: clamp(56px, 7.3vw, 104px); font-weight: 400; line-height: .98; letter-spacing: -.055em; }
+    h1 span { display: block; margin: 13px 0; color: var(--olive); font-size: .56em; font-style: italic; letter-spacing: 0; }
+    .hero-note { max-width: 320px; margin: 30px 0 0; color: #55564f; font-family: var(--serif); font-size: 19px; line-height: 1.65; }
+    .hero-photo { position: relative; min-height: 520px; background: #d7d3c7 url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85") center 48% / cover no-repeat; }
+    .hero-photo::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 70%, rgba(32, 34, 28, .22)); }
+    .photo-caption { position: absolute; z-index: 1; right: 26px; bottom: 23px; color: #fff; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
+    .invitation { padding: 112px 24px 120px; text-align: center; }
+    .section-label { margin: 0 0 18px; color: var(--olive); font-size: 10px; font-weight: 600; letter-spacing: .23em; text-transform: uppercase; }
+    h2 { margin: 0; font-family: var(--serif); font-size: clamp(36px, 5vw, 58px); font-weight: 400; letter-spacing: -.035em; }
+    .invitation-intro { max-width: 490px; margin: 18px auto 42px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .invite-frame { max-width: 540px; margin: auto; padding: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.26); box-shadow: 0 18px 55px rgba(50, 47, 38, .08); }
+    .invite-frame img { display: block; width: 100%; height: auto; }
+    .invite-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 27px; color: var(--ink); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
+    .invite-link:hover { color: var(--olive); }
+    .invite-link span { font-size: 17px; }
+    .details { padding: 72px 24px 76px; background: #e9e8df; text-align: center; }
+    .details p:last-child { max-width: 430px; margin: 18px auto 0; color: #66675e; font-family: var(--serif); font-size: 19px; line-height: 1.7; }
+    footer { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 34px 20px 30px; background: #34372f; color: #f6f3ed; text-align: center; }
+    footer img { width: 86px; height: 50px; object-fit: contain; }
+    footer p { margin: 0; color: #d1d1c8; font-family: var(--serif); font-size: 15px; font-style: italic; }
+    @media (max-width: 700px) {
+      .topbar { height: 72px; }
+      .topbar img { width: 94px; height: 48px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; }
+      .hero-copy { min-height: 420px; padding: 70px 24px 62px; }
+      .hero-photo { min-height: 390px; }
+      .invitation { padding: 86px 20px 92px; }
+      .invite-frame { padding: 8px; }
+      .details { padding: 62px 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Enzo and Kat">
+    <img src="./Enzo%20%26%20Kat/Logo_black.jpg" alt="Enzo and Kat wedding monogram">
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="welcome-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A celebration of love</p>
+        <h1 id="welcome-title">Enzo <span>&amp;</span> Kat</h1>
+        <p class="hero-note">With full hearts, we invite you to join us as we begin our next chapter together.</p>
+      </div>
+      <div class="hero-photo" role="img" aria-label="Romantic wedding celebration among the trees">
+        <span class="photo-caption">A day to remember</span>
+      </div>
+    </section>
+
+    <section class="invitation" id="invitation" aria-labelledby="invitation-title">
+      <p class="section-label">You are invited</p>
+      <h2 id="invitation-title">Please celebrate with us</h2>
+      <p class="invitation-intro">It wouldn't be the same without you. Your invitation has all the details for our special day—we can't wait to celebrate together.</p>
+      <div class="invite-frame">
+        <img src="./Enzo%20%26%20Kat.jpg" alt="The wedding invitation from Enzo and Kat">
+      </div>
+      <a class="invite-link" href="./Enzo%20%26%20Kat.jpg" target="_blank" rel="noopener">Open invitation <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="details" aria-label="Wedding invitation details">
+      <p class="section-label">The details</p>
+      <h2>All in one place</h2>
+      <p>Please refer to your invitation for the date, venue, and RSVP information. We look forward to celebrating with you.</p>
+    </section>
+  </main>
+  <footer>
+    <img src="./Enzo%20%26%20Kat/Logo_Light.jpg" alt="Enzo and Kat monogram">
+    <p>With love, Enzo &amp; Kat</p>
+  </footer>
+</body>
+</html>
