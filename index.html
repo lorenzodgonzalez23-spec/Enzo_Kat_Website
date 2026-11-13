@@ -79,6 +79,19 @@
     .dot { width: 7px; height: 7px; padding: 0; border: 1px solid #77746e; border-radius: 50%; background: transparent; cursor: pointer; }
     .dot[aria-current="true"] { background: #4a4945; }
 
+    .rsvp { padding: clamp(72px, 9vw, 110px) 20px 82px; background: #f2efe9; }
+    .rsvp-panel { width: min(100%, 720px); margin: 0 auto; padding: clamp(24px, 5vw, 46px); border: 1px solid var(--line); background: rgba(255,255,255,.55); box-shadow: 0 18px 50px rgba(31,30,28,.04); }
+    .rsvp-panel h2 { text-align: center; }
+    .rsvp-form { display: grid; gap: 18px; margin-top: 24px; }
+    .field { display: grid; gap: 8px; }
+    .field label { color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
+    .field input, .field select { width: 100%; padding: 14px 14px; border: 1px solid #d6d1c9; border-radius: 0; background: #fff; color: var(--ink); font-size: 15px; }
+    .field input:focus, .field select:focus { border-color: #4d4d48; outline: 3px solid rgba(96,95,90,0.1); }
+    .button-row { display: flex; justify-content: center; margin-top: 10px; }
+    .submit-btn { min-width: 200px; padding: 15px 22px; border: 0; background: var(--ink); color: #fff; cursor: pointer; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    .submit-btn:hover { background: #343330; }
+    .success-message { margin-top: 18px; padding: 14px 16px; border: 1px solid #d7d0c6; background: rgba(255,255,255,.7); color: #3f3f3d; font-size: 14px; }
+
     footer { display: grid; min-height: 190px; place-content: center; justify-items: center; gap: 10px; padding: 31px 20px; color: var(--ivory); background: #20201e; text-align: center; }
     .footer-logo { display: block; width: 84px; height: 55px; object-fit: contain; }
     footer p { margin: 0; color: #d3d1cc; font-family: var(--serif); font-size: 15px; font-style: italic; }
@@ -97,6 +110,7 @@
       .carousel-control { width: 40px; height: 40px; }
       .carousel-control.prev { left: 10px; }
       .carousel-control.next { right: 10px; }
+      .submit-btn { width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
   </style>
@@ -146,6 +160,31 @@
         </div>
       </div>
     </section>
+
+    <section class="rsvp" aria-labelledby="rsvp-title">
+      <div class="rsvp-panel">
+        <p class="section-label" style="text-align:center;">RSVP</p>
+        <h2 id="rsvp-title">We would love to celebrate with you</h2>
+        <form class="rsvp-form" id="rsvpForm">
+          <div class="field">
+            <label for="guestName">Guest Name</label>
+            <input id="guestName" name="guestName" type="text" placeholder="Enter full name" required>
+          </div>
+          <div class="field">
+            <label for="attendance">Attendance</label>
+            <select id="attendance" name="attendance" required>
+              <option value="">Select an option</option>
+              <option value="Accepts with pleasure">Accepts with pleasure</option>
+              <option value="Regretfully declines">Regretfully declines</option>
+            </select>
+          </div>
+          <div class="button-row">
+            <button class="submit-btn" type="submit">Submit RSVP</button>
+          </div>
+          <div id="successMessage" class="success-message" style="display:none;" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
   </main>
   <footer>
     <img class="footer-logo" src="./Enzo%20%26%20Kat/Logo_Light-removebg-preview.png" alt="Enzo and Kat monogram">
@@ -171,6 +210,48 @@
       document.querySelector('.prev').addEventListener('click', () => showPhoto(current - 1));
       document.querySelector('.next').addEventListener('click', () => showPhoto(current + 1));
       dots.forEach((dot, index) => dot.addEventListener('click', () => showPhoto(index)));
+
+      const form = document.getElementById('rsvpForm');
+      const successMessage = document.getElementById('successMessage');
+      const STORAGE_KEY = 'enzo-kat-rsvp-submissions';
+
+      function loadEntries() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        } catch {
+          return [];
+        }
+      }
+
+      function saveEntries(entries) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const guestName = (formData.get('guestName') || '').toString().trim();
+        const attendance = (formData.get('attendance') || '').toString().trim();
+
+        if (!guestName || !attendance) {
+          successMessage.style.display = 'block';
+          successMessage.textContent = 'Please enter your name and RSVP response.';
+          return;
+        }
+
+        const entries = loadEntries();
+        const newEntry = {
+          guestName,
+          attendance,
+          submittedAt: new Date().toISOString()
+        };
+        entries.push(newEntry);
+        saveEntries(entries);
+
+        successMessage.style.display = 'block';
+        successMessage.textContent = 'Thank you! Your RSVP has been saved on this device.';
+        form.reset();
+      });
     })();
   </script>
 </body>
