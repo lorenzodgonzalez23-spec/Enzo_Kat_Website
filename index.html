@@ -3,255 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#171715">
-  <meta name="description" content="Save the date: Enzo and Kat are getting married on June 25, 2027, in Antipolo City.">
-  <title>Save the Date — Enzo &amp; Kat</title>
+  <meta name="theme-color" content="#f6f2eb">
+  <meta name="description" content="Enzo and Kat are getting married on June 25, 2027. Celebrate their wedding in Antipolo City.">
+  <title>Enzo &amp; Kat — Save the Date</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --ivory: #f5f3ef;
-      --paper: #fbfaf8;
-      --ink: #20201e;
-      --muted: #777570;
-      --silver: #aaa7a0;
-      --line: #dedbd5;
-      --serif: "Playfair Display", Georgia, serif;
-      --sans: "DM Sans", sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-    a { color: inherit; }
-    .skip-link { position: absolute; top: -50px; left: 16px; z-index: 5; padding: 10px 14px; background: white; }
-    .skip-link:focus { top: 16px; }
-
-    .hero {
-      position: relative;
-      isolation: isolate;
-      display: grid;
-      min-height: 100vh;
-      min-height: 100svh;
-      place-items: center;
-      overflow: hidden;
-      padding: 34px 22px 58px;
-      color: #fff;
-      text-align: center;
-      background: #282724 url("./Enzo%20%26%20Kat/Header.JPG") center 48% / cover no-repeat;
-    }
-    .hero::before { position: absolute; z-index: -1; inset: 0; content: ""; background: linear-gradient(180deg, rgba(15, 15, 14, .3), rgba(15, 15, 14, .16) 38%, rgba(15, 15, 14, .62)); }
-    .hero-content { width: min(100%, 850px); padding: 42px 18px; }
-    .hero-logo { display: block; width: 100px; height: 66px; margin: 0 auto 30px; object-fit: contain; }
-    .eyebrow { margin: 0 0 19px; font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
-    h1 { margin: 0; font-family: var(--serif); font-size: clamp(56px, 10.5vw, 116px); font-weight: 400; line-height: 1.03; letter-spacing: -.055em; text-wrap: balance; }
-    h1 .amp { display: inline-block; padding: 0 .11em; color: #dedbd5; font-size: .66em; font-style: italic; }
-    .hero-date { margin: 28px 0 0; font-size: 11px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; }
-    .hero-rule { width: 46px; height: 1px; margin: 30px auto 0; background: rgba(255,255,255,.72); }
-    .scroll-cue { position: absolute; bottom: 25px; left: 50%; display: grid; justify-items: center; gap: 9px; transform: translateX(-50%); color: rgba(255,255,255,.85); font-size: 9px; letter-spacing: .2em; text-decoration: none; text-transform: uppercase; }
-    .scroll-cue::after { width: 1px; height: 25px; content: ""; background: rgba(255,255,255,.7); }
-
-    .details { position: relative; padding: clamp(78px, 10vw, 116px) 24px clamp(82px, 11vw, 126px); text-align: center; }
-    .details-inner { width: min(100%, 680px); margin: 0 auto; }
-    .details-logo { width: 95px; height: 63px; margin: 0 auto 29px; object-fit: contain; }
-    .section-label { margin: 0 0 15px; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; }
-    h2 { margin: 0; font-family: var(--serif); font-size: clamp(37px, 6vw, 62px); font-weight: 400; letter-spacing: -.04em; }
-    .place { margin: 15px 0 0; color: #5c5a56; font-family: var(--serif); font-size: clamp(20px, 3vw, 26px); font-style: italic; }
-    .detail-rule { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 31px auto; color: #77746e; font-size: 13px; }
-    .detail-rule::before, .detail-rule::after { width: 45px; height: 1px; content: ""; background: var(--line); }
-    .formal-note { margin: 0; color: var(--muted); font-size: 12px; letter-spacing: .08em; }
-
-    .gallery { padding: clamp(70px, 9vw, 108px) 22px 88px; background: var(--ivory); text-align: center; }
-    .gallery-heading { margin: 0 auto 34px; }
-    .gallery-heading h2 { font-size: clamp(34px, 5vw, 52px); }
-    .gallery-heading .section-label { margin-bottom: 12px; }
-    .carousel { position: relative; width: min(100%, 1050px); margin: 0 auto; }
-    .carousel-frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: #dedbd5; }
-    .carousel-image { display: block; width: 100%; height: 100%; object-fit: cover; transition: opacity .25s ease; }
-    .carousel-control { position: absolute; top: 50%; display: grid; width: 48px; height: 48px; place-items: center; transform: translateY(-50%); border: 1px solid rgba(255,255,255,.72); border-radius: 50%; background: rgba(24,24,23,.4); color: #fff; cursor: pointer; font-size: 25px; line-height: 1; transition: background .2s ease; }
-    .carousel-control:hover, .carousel-control:focus-visible { background: rgba(24,24,23,.78); }
-    .carousel-control:focus-visible, .dot:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-    .carousel-control.prev { left: 18px; }
-    .carousel-control.next { right: 18px; }
-    .gallery-bottom { display: flex; align-items: center; justify-content: center; gap: 18px; padding-top: 21px; }
-    .gallery-caption { min-width: 120px; margin: 0; color: var(--muted); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
-    .gallery-dots { display: flex; gap: 8px; }
-    .dot { width: 7px; height: 7px; padding: 0; border: 1px solid #77746e; border-radius: 50%; background: transparent; cursor: pointer; }
-    .dot[aria-current="true"] { background: #4a4945; }
-
-    .rsvp { padding: clamp(72px, 9vw, 110px) 20px 82px; background: #f2efe9; }
-    .rsvp-panel { width: min(100%, 720px); margin: 0 auto; padding: clamp(24px, 5vw, 46px); border: 1px solid var(--line); background: rgba(255,255,255,.55); box-shadow: 0 18px 50px rgba(31,30,28,.04); }
-    .rsvp-panel h2 { text-align: center; }
-    .rsvp-form { display: grid; gap: 18px; margin-top: 24px; }
-    .field { display: grid; gap: 8px; }
-    .field label { color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
-    .field input, .field select { width: 100%; padding: 14px 14px; border: 1px solid #d6d1c9; border-radius: 0; background: #fff; color: var(--ink); font-size: 15px; }
-    .field input:focus, .field select:focus { border-color: #4d4d48; outline: 3px solid rgba(96,95,90,0.1); }
-    .button-row { display: flex; justify-content: center; margin-top: 10px; }
-    .submit-btn { min-width: 200px; padding: 15px 22px; border: 0; background: var(--ink); color: #fff; cursor: pointer; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
-    .submit-btn:hover { background: #343330; }
-    .success-message { margin-top: 18px; padding: 14px 16px; border: 1px solid #d7d0c6; background: rgba(255,255,255,.7); color: #3f3f3d; font-size: 14px; }
-
-    footer { display: grid; min-height: 190px; place-content: center; justify-items: center; gap: 10px; padding: 31px 20px; color: var(--ivory); background: #20201e; text-align: center; }
-    .footer-logo { display: block; width: 84px; height: 55px; object-fit: contain; }
-    footer p { margin: 0; color: #d3d1cc; font-family: var(--serif); font-size: 15px; font-style: italic; }
-
-    @media (min-width: 900px) { .hero { background-position: center 45%; } }
-    @media (max-width: 600px) {
-      .hero { min-height: 90vh; min-height: 90svh; background-position: 54% center; }
-      .hero-content { padding: 30px 12px 48px; }
-      .hero-logo { width: 84px; height: 56px; margin-bottom: 27px; }
-      .eyebrow { font-size: 9px; letter-spacing: .25em; }
-      .hero-date { margin-top: 24px; font-size: 10px; letter-spacing: .2em; }
-      .scroll-cue { bottom: 17px; }
-      .details-logo { width: 82px; height: 56px; margin-bottom: 25px; }
-      .gallery { padding: 65px 14px 72px; }
-      .carousel-frame { aspect-ratio: 4 / 3; }
-      .carousel-control { width: 40px; height: 40px; }
-      .carousel-control.prev { left: 10px; }
-      .carousel-control.next { right: 10px; }
-      .submit-btn { width: 100%; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+    :root{--ink:#272721;--cream:#f6f2eb;--paper:#fbf9f5;--olive:#62664f;--muted:#77766e;--line:#d9d4c9;--serif:'Playfair Display',Georgia,serif;--display:'Italiana',Georgia,serif;--sans:'DM Sans',Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}img{display:block;max-width:100%}a{color:inherit}.skip{position:absolute;top:-50px;left:1rem;z-index:10;background:white;padding:.8rem}.skip:focus{top:1rem}
+    .topbar{position:absolute;z-index:2;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:24px clamp(20px,5vw,74px);color:white}.brand{font-family:var(--display);font-size:24px;letter-spacing:.08em;text-decoration:none}.nav{display:flex;gap:clamp(16px,3vw,40px);font-size:10px;letter-spacing:.18em;text-transform:uppercase}.nav a{text-decoration:none;border-bottom:1px solid transparent;padding:8px 0}.nav a:hover{border-color:currentColor}
+    .hero{position:relative;display:grid;min-height:100svh;place-items:center;overflow:hidden;padding:115px 20px 82px;color:white;text-align:center;background:#555 url('./Enzo%20%26%20Kat/Website%20Photos/Hero%20Header.JPG') center 48%/cover no-repeat}.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,24,18,.28),rgba(22,24,18,.08) 40%,rgba(22,24,18,.54))}.hero-content{position:relative;width:min(900px,100%);animation:rise .9s both}.kicker,.label{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase}.kicker{margin:0 0 25px}.hero h1{margin:0;font:400 clamp(70px,13vw,166px)/.82 var(--display);letter-spacing:-.035em}.hero h1 span{display:block;margin:15px 0;font:italic 400 .4em/1 var(--serif);letter-spacing:.02em}.hero-date{margin:38px 0 0;font-size:11px;letter-spacing:.28em;text-transform:uppercase}.hero-line{width:44px;height:1px;background:#fff;margin:27px auto}.hero-sub{font-family:var(--serif);font-style:italic;font-size:16px}.scroll{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}.scroll:after{content:'';display:block;width:1px;height:26px;margin:10px auto 0;background:#fff}
+    .intro{padding:clamp(80px,11vw,150px) 24px;text-align:center}.intro-inner{width:min(720px,100%);margin:auto}.label{margin:0 0 18px;color:var(--olive)}h2{font:400 clamp(42px,7vw,78px)/1.03 var(--display);letter-spacing:-.025em;margin:0}.intro .copy{margin:24px auto 0;max-width:520px;color:#68675f;font:italic 20px/1.7 var(--serif)}.date-details{display:flex;justify-content:center;align-items:center;gap:clamp(20px,5vw,55px);margin:43px auto 0}.date-details div{min-width:100px}.date-details strong{display:block;font:400 27px var(--serif)}.date-details span{display:block;margin-top:8px;color:var(--muted);font-size:9px;letter-spacing:.17em;text-transform:uppercase}.date-details .divider{width:1px;height:45px;background:var(--line);min-width:1px}
+    .feature{display:grid;grid-template-columns:1fr 1fr;min-height:600px;background:var(--cream)}.feature-image{min-height:500px;background:#aaa url('./Enzo%20%26%20Kat/Website%20Photos/Large.JPG') center/cover no-repeat}.feature-copy{display:grid;align-content:center;padding:clamp(42px,8vw,112px)}.feature-copy h2{max-width:470px}.feature-copy p:not(.label){max-width:440px;color:#68675f;font:17px/1.8 var(--serif)}.ornament{color:var(--olive);font-size:18px;margin-top:16px}
+    .gallery{padding:clamp(80px,10vw,130px) 20px;background:#eeebe4;text-align:center}.gallery-head{margin-bottom:42px}.gallery-head h2{font-size:clamp(40px,6vw,68px)}.carousel{position:relative;width:min(1120px,100%);margin:auto}.frame{position:relative;overflow:hidden;background:#d7d4cb;aspect-ratio:16/9}.frame img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}.control{position:absolute;top:50%;display:grid;place-items:center;width:48px;height:48px;transform:translateY(-50%);border:1px solid rgba(255,255,255,.8);border-radius:50%;background:rgba(30,30,27,.2);color:white;font-size:25px;cursor:pointer}.control:hover{background:rgba(30,30,27,.75)}.prev{left:18px}.next{right:18px}.gallery-meta{display:flex;justify-content:center;align-items:center;gap:18px;padding-top:20px}.caption{min-width:105px;color:var(--muted);font-size:9px;letter-spacing:.17em;text-transform:uppercase}.dots{display:flex;gap:8px}.dot{width:7px;height:7px;border:1px solid #68675f;border-radius:50%;padding:0;background:transparent;cursor:pointer}.dot[aria-current=true]{background:#68675f}
+    .story{display:grid;grid-template-columns:1fr 1fr;min-height:560px;background:var(--paper)}.story-image{min-height:430px;background:#aaa url('./Enzo%20%26%20Kat/Website%20Photos/Proposal1.jpg') center/cover no-repeat}.story-image.second{background-image:url('./Enzo%20%26%20Kat/Website%20Photos/Proposal2.jpg')}.story-text{display:grid;align-content:center;padding:clamp(42px,8vw,100px)}.story-text h2{font-size:clamp(42px,6vw,70px)}.story-text p:not(.label){color:#68675f;font:17px/1.85 var(--serif);max-width:480px}.story:nth-child(even) .story-image{order:2}
+    .rsvp{padding:clamp(80px,10vw,130px) 20px;background:var(--olive);color:#fff}.rsvp-card{width:min(680px,100%);margin:auto;padding:clamp(30px,6vw,66px);border:1px solid rgba(255,255,255,.38);text-align:center}.rsvp .label{color:#e4e0d4}.rsvp h2{font-size:clamp(40px,6vw,66px)}.rsvp-intro{margin:18px auto 30px;color:#ece9df;font:italic 17px var(--serif)}.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left}.field{display:grid;gap:8px}.field.full{grid-column:1/-1}.field label{font-size:9px;letter-spacing:.16em;text-transform:uppercase}.field input,.field select{width:100%;padding:14px;border:1px solid rgba(255,255,255,.55);border-radius:0;background:rgba(255,255,255,.96);color:var(--ink);font:14px var(--sans)}.submit{grid-column:1/-1;justify-self:center;min-width:190px;margin-top:8px;padding:15px 25px;border:1px solid white;background:transparent;color:#fff;font:500 10px var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}.submit:hover{background:#fff;color:var(--olive)}.message{grid-column:1/-1;margin:4px 0 0;font-size:13px}
+    .closing{position:relative;display:grid;min-height:70vh;place-items:center;padding:70px 20px;color:#fff;text-align:center;background:#555 url('./Enzo%20%26%20Kat/Website%20Photos/End.JPG') center/cover no-repeat}.closing:before{content:'';position:absolute;inset:0;background:rgba(23,24,19,.35)}.closing-inner{position:relative}.closing h2{font-size:clamp(54px,10vw,112px)}.closing p{font:italic 20px var(--serif)}footer{padding:26px;text-align:center;background:#272721;color:#e7e2d8;font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+    @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:700px){.topbar{padding:18px 20px}.brand{font-size:21px}.nav{gap:14px;font-size:8px}.nav a:nth-child(2){display:none}.hero{background-position:57% center}.hero h1{font-size:clamp(67px,18vw,112px)}.date-details{gap:15px}.date-details strong{font-size:22px}.date-details span{font-size:8px}.feature,.story{grid-template-columns:1fr}.feature-image,.story-image{min-height:62vw}.feature-copy,.story-text{padding:54px 27px}.story:nth-child(even) .story-image{order:0}.frame{aspect-ratio:4/3}.control{width:40px;height:40px}.prev{left:10px}.next{right:10px}.form{grid-template-columns:1fr}.field.full,.submit,.message{grid-column:1}.closing{min-height:62vh}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#details">Skip to wedding details</a>
+  <a class="skip" href="#details">Skip to wedding details</a>
+  <header class="topbar"><a class="brand" href="#top" aria-label="Enzo and Kat home">E <span aria-hidden="true">&amp;</span> K</a><nav class="nav" aria-label="Main navigation"><a href="#details">Our day</a><a href="#story">Our story</a><a href="#gallery">Gallery</a><a href="#rsvp">RSVP</a></nav></header>
   <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-content">
-        <img class="hero-logo" src="./Enzo%20%26%20Kat/Logo_Light-removebg-preview.png" alt="Enzo and Kat monogram">
-        <p class="eyebrow">Together with our families</p>
-        <h1 id="hero-title">Save the Date<br>Enzo <span class="amp">&amp;</span> Kat</h1>
-        <p class="hero-date"><time datetime="2027-06-25">June 25, 2027</time></p>
-        <div class="hero-rule" aria-hidden="true"></div>
-      </div>
-      <a class="scroll-cue" href="#details" aria-label="Scroll to wedding details">Discover</a>
-    </section>
-
-    <section class="details" id="details" aria-labelledby="details-title">
-      <div class="details-inner">
-        <img class="details-logo" src="./Enzo%20%26%20Kat/Logo_black-removebg-preview.png" alt="">
-        <p class="section-label">The beginning of forever</p>
-        <h2 id="details-title">Join us in celebrating</h2>
-        <p class="place">Antipolo City</p>
-        <div class="detail-rule" aria-hidden="true">✦</div>
-        <p class="formal-note">Formal invitation to follow</p>
-      </div>
-    </section>
-
-    <section class="gallery" aria-labelledby="gallery-title">
-      <div class="gallery-heading">
-        <p class="section-label">A moment in time</p>
-        <h2 id="gallery-title">A little glimpse of us</h2>
-      </div>
-      <div class="carousel" aria-roledescription="carousel" aria-label="Enzo and Kat's prenup photos">
-        <div class="carousel-frame" aria-live="polite">
-          <img class="carousel-image" id="carousel-image" src="./Enzo%20%26%20Kat/5Q1A8634.JPG" alt="Enzo and Kat during their prenup photoshoot">
-          <button class="carousel-control prev" type="button" aria-label="Previous photo">‹</button>
-          <button class="carousel-control next" type="button" aria-label="Next photo">›</button>
-        </div>
-        <div class="gallery-bottom">
-          <p class="gallery-caption" id="gallery-caption">Photo 1 of 2</p>
-          <div class="gallery-dots" role="group" aria-label="Choose a photo">
-            <button class="dot" type="button" aria-label="Show photo 1" aria-current="true"></button>
-            <button class="dot" type="button" aria-label="Show photo 2" aria-current="false"></button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="rsvp" aria-labelledby="rsvp-title">
-      <div class="rsvp-panel">
-        <p class="section-label" style="text-align:center;">RSVP</p>
-        <h2 id="rsvp-title">We would love to celebrate with you</h2>
-        <form class="rsvp-form" id="rsvpForm">
-          <div class="field">
-            <label for="guestName">Guest Name</label>
-            <input id="guestName" name="guestName" type="text" placeholder="Enter full name" required>
-          </div>
-          <div class="field">
-            <label for="attendance">Attendance</label>
-            <select id="attendance" name="attendance" required>
-              <option value="">Select an option</option>
-              <option value="Accepts with pleasure">Accepts with pleasure</option>
-              <option value="Regretfully declines">Regretfully declines</option>
-            </select>
-          </div>
-          <div class="button-row">
-            <button class="submit-btn" type="submit">Submit RSVP</button>
-          </div>
-          <div id="successMessage" class="success-message" style="display:none;" aria-live="polite"></div>
-        </form>
-      </div>
-    </section>
+    <section class="hero" id="top" aria-labelledby="hero-title"><div class="hero-content"><p class="kicker">Together with our families</p><h1 id="hero-title">Enzo<span>&amp;</span>Kat</h1><p class="hero-date">Save the date&nbsp; · &nbsp;<time datetime="2027-06-25">June 25, 2027</time></p><div class="hero-line"></div><p class="hero-sub">A day to celebrate a lifetime of love</p></div><a class="scroll" href="#details">Discover</a></section>
+    <section class="intro" id="details" aria-labelledby="details-title"><div class="intro-inner"><p class="label">The beginning of forever</p><h2 id="details-title">We’re getting married</h2><p class="copy">With joyful hearts, we invite you to join us as we begin our next chapter together.</p><div class="date-details"><div><strong>Friday</strong><span>Day</span></div><i class="divider" aria-hidden="true"></i><div><strong>June 25</strong><span>Date</span></div><i class="divider" aria-hidden="true"></i><div><strong>Antipolo</strong><span>City</span></div></div></div></section>
+    <section class="feature" aria-label="Wedding location"><div class="feature-image" role="img" aria-label="Enzo and Kat together"></div><div class="feature-copy"><p class="label">A celebration of love</p><h2>Join us in Antipolo City</h2><p>We can’t wait to gather our favorite people, share a beautiful day, and make memories that will last a lifetime.</p><p class="ornament" aria-hidden="true">✦ &nbsp; Formal invitation to follow &nbsp; ✦</p></div></section>
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title"><div class="gallery-head"><p class="label">A moment in time</p><h2 id="gallery-title">A little glimpse of us</h2></div><div class="carousel" role="region" aria-roledescription="carousel" aria-label="Enzo and Kat's photographs"><div class="frame" aria-live="polite"><img id="slide" src="./Enzo%20%26%20Kat/Website%20Photos/Carousel1.JPG" alt="Enzo and Kat, photograph one"><button class="control prev" type="button" aria-label="Previous photo">‹</button><button class="control next" type="button" aria-label="Next photo">›</button></div><div class="gallery-meta"><p class="caption" id="caption">Photo 1 of 3</p><div class="dots" role="group" aria-label="Choose a photo"><button class="dot" type="button" aria-label="Show photo 1" aria-current="true"></button><button class="dot" type="button" aria-label="Show photo 2" aria-current="false"></button><button class="dot" type="button" aria-label="Show photo 3" aria-current="false"></button></div></div></div></section>
+    <section class="story" id="story" aria-label="Our story"><div class="story-image" role="img" aria-label="A special moment in Enzo and Kat's story"></div><div class="story-text"><p class="label">The question</p><h2>One little yes.<br>A whole life together.</h2><p>From the day our paths crossed to the moment we said yes to forever, every chapter has brought us closer to this one. We’re so excited for what comes next—and for you to be part of it.</p></div></section>
+    <section class="story" aria-label="A moment to remember"><div class="story-image second" role="img" aria-label="Enzo and Kat celebrating their engagement"></div><div class="story-text"><p class="label">Our next chapter</p><h2>Forever starts here.</h2><p>Mark your calendar and get ready to celebrate. We look forward to seeing you in Antipolo City on June 25, 2027.</p></div></section>
+    <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title"><div class="rsvp-card"><p class="label">Kindly reply</p><h2 id="rsvp-title">Will you celebrate with us?</h2><p class="rsvp-intro">We’d love to know if you can join us.</p><form class="form" id="rsvpForm"><div class="field full"><label for="guestName">Your name</label><input id="guestName" name="guestName" type="text" placeholder="Enter your full name" required></div><div class="field full"><label for="attendance">Your response</label><select id="attendance" name="attendance" required><option value="">Please select</option><option value="Accepts with pleasure">Joyfully accepts</option><option value="Regretfully declines">Regretfully declines</option></select></div><button class="submit" type="submit">Send response</button><p class="message" id="message" aria-live="polite" hidden></p></form></div></section>
+    <section class="closing" aria-label="We can't wait to celebrate"><div class="closing-inner"><p class="label">June 25, 2027 · Antipolo City</p><h2>See you there</h2><p>With love, Enzo &amp; Kat</p></div></section>
   </main>
-  <footer>
-    <img class="footer-logo" src="./Enzo%20%26%20Kat/Logo_Light-removebg-preview.png" alt="Enzo and Kat monogram">
-    <p>We can't wait to celebrate with you.</p>
-  </footer>
+  <footer>Enzo &amp; Kat &nbsp;·&nbsp; June 25, 2027</footer>
   <script>
-    (() => {
-      const photos = [
-        { src: './Enzo%20%26%20Kat/5Q1A8634.JPG', alt: 'Enzo and Kat together during their prenup photoshoot' },
-        { src: './Enzo%20%26%20Kat/5Q1A9347.JPG', alt: 'Another moment from Enzo and Kat’s prenup photoshoot' }
+    (()=>{
+      const photos=[
+        {src:'./Enzo%20%26%20Kat/Website%20Photos/Carousel1.JPG',alt:'Enzo and Kat, photograph one'},
+        {src:'./Enzo%20%26%20Kat/Website%20Photos/Carousel2.JPG',alt:'Enzo and Kat, photograph two'},
+        {src:'./Enzo%20%26%20Kat/Website%20Photos/Carousel3.JPG',alt:'Enzo and Kat, photograph three'}
       ];
-      const image = document.querySelector('#carousel-image');
-      const caption = document.querySelector('#gallery-caption');
-      const dots = [...document.querySelectorAll('.dot')];
-      let current = 0;
-      function showPhoto(index) {
-        current = (index + photos.length) % photos.length;
-        image.src = photos[current].src;
-        image.alt = photos[current].alt;
-        caption.textContent = `Photo ${current + 1} of ${photos.length}`;
-        dots.forEach((dot, dotIndex) => dot.setAttribute('aria-current', String(dotIndex === current)));
-      }
-      document.querySelector('.prev').addEventListener('click', () => showPhoto(current - 1));
-      document.querySelector('.next').addEventListener('click', () => showPhoto(current + 1));
-      dots.forEach((dot, index) => dot.addEventListener('click', () => showPhoto(index)));
-
-      const form = document.getElementById('rsvpForm');
-      const successMessage = document.getElementById('successMessage');
-      const STORAGE_KEY = 'enzo-kat-rsvp-submissions';
-
-      function loadEntries() {
-        try {
-          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        } catch {
-          return [];
-        }
-      }
-
-      function saveEntries(entries) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-      }
-
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const formData = new FormData(form);
-        const guestName = (formData.get('guestName') || '').toString().trim();
-        const attendance = (formData.get('attendance') || '').toString().trim();
-
-        if (!guestName || !attendance) {
-          successMessage.style.display = 'block';
-          successMessage.textContent = 'Please enter your name and RSVP response.';
-          return;
-        }
-
-        const entries = loadEntries();
-        const newEntry = {
-          guestName,
-          attendance,
-          submittedAt: new Date().toISOString()
-        };
-        entries.push(newEntry);
-        saveEntries(entries);
-
-        successMessage.style.display = 'block';
-        successMessage.textContent = 'Thank you! Your RSVP has been saved on this device.';
-        form.reset();
-      });
+      const image=document.getElementById('slide'),caption=document.getElementById('caption'),dots=[...document.querySelectorAll('.dot')];let current=0;
+      function show(index){current=(index+photos.length)%photos.length;image.src=photos[current].src;image.alt=photos[current].alt;caption.textContent=`Photo ${current+1} of ${photos.length}`;dots.forEach((dot,i)=>dot.setAttribute('aria-current',String(i===current)));}
+      document.querySelector('.prev').addEventListener('click',()=>show(current-1));document.querySelector('.next').addEventListener('click',()=>show(current+1));dots.forEach((dot,i)=>dot.addEventListener('click',()=>show(i)));
+      document.getElementById('rsvpForm').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;const data=new FormData(form);const entry={name:String(data.get('guestName')).trim(),response:String(data.get('attendance')),submittedAt:new Date().toISOString()};try{const key='enzo-kat-rsvp-demo';const saved=JSON.parse(localStorage.getItem(key)||'[]');saved.push(entry);localStorage.setItem(key,JSON.stringify(saved));}catch(e){}const message=document.getElementById('message');message.hidden=false;message.textContent='Thank you! Your response has been saved in this browser preview.';form.reset();});
     })();
   </script>
 </body>
