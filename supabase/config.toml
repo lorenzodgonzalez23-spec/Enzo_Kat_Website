@@ -1,0 +1,4 @@
+project_id = "enzo-kat-website"
+
+[functions.submit-rsvp]
+verify_jwt = false
