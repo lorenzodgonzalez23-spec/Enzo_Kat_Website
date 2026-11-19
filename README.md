@@ -108,11 +108,18 @@ In staging, verify missing-code, valid-code, invalid/revoked-code, guest-limit, 
 
 ## Production setup
 
-Do not deploy the invitation migration or functions to production until the staging flow has been reviewed and approved. At production cutover:
+The production database migrations and both Edge Functions are deployed, and `ALLOWED_ORIGINS` is configured for the live site. The invitation-aware website is not live until its reviewed changes are merged into `main` and GitHub Pages finishes publishing.
 
-1. Link the Supabase CLI to the production project, apply the migration, set `ALLOWED_ORIGINS` to `https://enzoandkat.site,https://www.enzoandkat.site`, and deploy both Edge Functions.
-2. Generate production invitation files and import the hash-only CSV into the production `rsvp_invites` table.
-3. Merge the reviewed frontend/config changes to `main`.
-4. Send guests their private invitation links after the live site has updated.
+To create the final invitation links:
 
-Confirm `rsvp-config.js` contains the production function URLs and public publishable key before merging. Never use staging configuration on the production site. The website is published from `main` at `https://enzoandkat.site/`.
+1. Prepare a private CSV with `invite_name`, `max_additional_guests`, and optional `email` columns.
+2. Generate production links from the repository root:
+
+   ```sh
+   deno run --allow-read --allow-write scripts/generate-invites.ts guest-list.csv https://enzoandkat.site/
+   ```
+
+3. Import only `invite-import.csv` into the production `rsvp_invites` table. Keep `invite-links.private.csv` secure; its links are bearer credentials.
+4. After the website update is live, test one invitation link, then send each private link only to its intended guest.
+
+`rsvp-config.js` contains the production function URLs and public publishable key. Never use staging configuration on the production site or commit the private invitation files.
