@@ -1,7 +1,9 @@
+import { isInvitationCode } from "../_shared/invitations.ts";
+
 export const MAX_ADDITIONAL_GUESTS = 6;
 
 export interface RsvpSubmission {
-  respondentName: string;
+  inviteCode: string;
   attendance: "accepts" | "declines";
   additionalGuestNames: string[];
 }
@@ -13,29 +15,16 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 export function validateSubmission(value: unknown): RsvpSubmission | null {
   if (!isRecord(value)) return null;
 
-  const respondentName = value.respondentName;
+  const inviteCode = value.inviteCode;
   const attendance = value.attendance;
-  const additionalGuestCount = value.additionalGuestCount;
   const additionalGuestNames = value.additionalGuestNames;
 
-  if (typeof respondentName !== "string" || typeof attendance !== "string") {
-    return null;
-  }
+  if (!isInvitationCode(inviteCode)) return null;
   if (attendance !== "accepts" && attendance !== "declines") return null;
   if (
-    typeof additionalGuestCount !== "number" ||
-    !Number.isInteger(additionalGuestCount) ||
-    additionalGuestCount < 0 || additionalGuestCount > MAX_ADDITIONAL_GUESTS
-  ) return null;
-  if (
     !Array.isArray(additionalGuestNames) ||
-    additionalGuestNames.length !== additionalGuestCount
+    additionalGuestNames.length > MAX_ADDITIONAL_GUESTS
   ) return null;
-
-  const cleanRespondentName = respondentName.trim();
-  if (cleanRespondentName.length === 0 || cleanRespondentName.length > 120) {
-    return null;
-  }
 
   const cleanAdditionalGuestNames: string[] = [];
   for (const name of additionalGuestNames) {
@@ -50,8 +39,15 @@ export function validateSubmission(value: unknown): RsvpSubmission | null {
   }
 
   return {
-    respondentName: cleanRespondentName,
+    inviteCode,
     attendance,
     additionalGuestNames: cleanAdditionalGuestNames,
   };
+}
+
+export function exceedsGuestLimit(
+  submission: RsvpSubmission,
+  maxAdditionalGuests: number,
+): boolean {
+  return submission.additionalGuestNames.length > maxAdditionalGuests;
 }

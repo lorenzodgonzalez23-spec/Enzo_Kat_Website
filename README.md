@@ -1,151 +1,125 @@
 # Enzo & Kat Wedding Website
 
-## Website and deployment
+Static wedding website for Enzo and Kat, published with GitHub Pages from the `main` branch.
 
+## RSVP and invitations
 
-The wedding website is a static site: its HTML, styles, scripts, and assets are served directly from the repository. It has no frontend build step or application server. GitHub Pages publishes the repository root from the `main` branch.
+Guests receive a unique invitation link. The code is kept in the link fragment (`#invite=...`), looked up by a Supabase Edge Function, and never stored in the invitation table as plaintext. The frontend shows the RSVP section only for a link containing a code:
 
+- No code: the RSVP section and navigation link stay hidden.
+- Valid code: the invite name and allowed number of additional guests are shown, and the RSVP form is enabled.
+- Invalid or revoked code: the RSVP section is shown with disabled fields and a message to contact the couple.
+- Supabase unavailable: the form remains disabled and shows a temporary service error, not an invalid-link message.
 
-- Live site: https://lorenzodgonzalez23-spec.github.io/Enzo_Kat_Website/
-- RSVP form and client-side submission code: `index.html`
-- Supabase endpoint and public key configuration: `rsvp-config.js`
+The additional guest limit is per invitation and excludes the named invitee. It is between zero and six. The Edge Function checks the code and limit on every lookup and submission; client-side visibility is not an access-control boundary.
 
+The backend uses:
 
-Merging a site change into `main` updates the GitHub Pages source; the live site reflects it after Pages finishes publishing.
+- `rsvp_invites`: invite name, SHA-256 code hash, allowed additional guest count, and active status.
+- `rsvp_submissions`: one current RSVP per invitation, with `updated_at`.
+- `rsvp_submission_history`: private snapshots of initial submissions and changes.
 
+The update is additive: existing RSVP rows are preserved and remain unlinked to invitations. Their `updated_at` is initialized when the migration runs; no earlier update history is available. New invitation-based submissions and subsequent changes are recorded in the history table. Public roles cannot read these tables. Project owners can review invitations, current RSVPs, and RSVP history in the Supabase dashboard.
 
-## RSVP services and data flow
+The couple does not need a custom admin webpage. A local generator prepares the import and invitation-link files; the Supabase Table Editor imports invitation records.
 
+## Prepare and import invitations
 
-The RSVP form sends submissions from the visitor’s browser to the Supabase Edge Function `submit-rsvp`. The function validates the request and inserts it into the Supabase Postgres table `public.rsvp_submissions`.
+Create a UTF-8 CSV with one row per invitation:
 
-
-```text
-Visitor's browser
-    -> GitHub Pages static site
-    -> Supabase Edge Function: submit-rsvp
-    -> Supabase Postgres: public.rsvp_submissions
+```csv
+invite_name,max_additional_guests,email
+Maria Santos,1,maria@example.com
+The Reyes Family,3,
+Alex Cruz,0,alex@example.com
 ```
 
-
-The configured Supabase project reference is `pikqsgfoygvycghlfeii`.
-
-
-The form supports accepting or declining. For an acceptance, the respondent can list up to six additional guests; the respondent is not included in that count. Declines must have zero additional guests. The database derives `additional_guest_count` from the saved guest-name array rather than trusting a client-supplied count.
-
-
-Each row contains:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| Column | Description |
-| --- | --- |
-| `id` | Generated row identifier |
-| `respondent_name` | Respondent’s name |
-| `attendance` | `accepts` or `declines` |
-| `additional_guest_names` | Names of additional guests |
-| `additional_guest_count` | Generated count of additional guests |
-| `submitted_at` | Database-generated submission time |
-
-
-
-## Security and access
-
-
-`rsvp-config.js` contains the Supabase function URL and a **public** publishable key (or legacy anon key). That key is expected to be visible to website visitors. Never put the Supabase service-role key in the website or commit it to the repository.
-
-
-The database has row-level security enabled, and direct table access is revoked for the public `anon` and `authenticated` roles. The Edge Function uses Supabase’s server-side service-role key to insert rows. The website has no public endpoint for reading RSVP submissions; project owners can review them in the Supabase dashboard.
-
-
-The function checks the request origin against `ALLOWED_ORIGINS` and validates the content type, request size, names, response, and guest-count limits. **The origin check is a browser CORS safeguard, not authentication**: the function is publicly reachable, and this setup does not currently include CAPTCHA or rate limiting. Project owners should monitor submissions for spam.
-
-
-## Supabase setup and deployment
-
-
-Install the [Supabase CLI](https://supabase.com/docs/guides/cli), then link the project and apply migrations to the remote database:
-
+`email` is optional and is only included in the private links file for the couple's use; it is not stored in the database. Generate the files with Deno:
 
 ```sh
-supabase login
-supabase link --project-ref pikqsgfoygvycghlfeii
-supabase db push --remote
+deno run --allow-read --allow-write scripts/generate-invites.ts guest-list.csv https://enzoandkat.site/
 ```
 
+The script writes two files in the current directory and refuses to overwrite existing files:
 
-Set the allowed website origin and deploy the Edge Function:
+- `invite-import.csv`: invite details and code hashes, ready to import into `rsvp_invites`.
+- `invite-links.private.csv`: the raw invitation links to distribute to guests.
 
+In the Supabase dashboard, select the intended project, open **Table Editor → `rsvp_invites`**, and import `invite-import.csv`. Check the project and column mapping before confirming. The invitation links are bearer credentials: keep `invite-links.private.csv` private, send each link only to its intended guest, and do not commit it. The generated output files are ignored by Git.
+
+If a links file is lost, generate a replacement code and update that invitation's `code_hash` in the dashboard; the old link will no longer work.
+
+## Local staging setup
+
+Use a separate Supabase project for staging and fake invitees only. Free Supabase projects may pause after inactivity; restore the staging project from the dashboard before testing if necessary.
+
+1. Create a staging project in Supabase and note its project reference.
+2. From the repository root, link the CLI to staging and apply migrations there:
+
+   ```sh
+   supabase login
+   supabase link --project-ref <staging-project-ref>
+   supabase db push --remote
+   ```
+
+3. Allow the local preview origin and deploy both functions:
+
+   ```sh
+   supabase secrets set --project-ref <staging-project-ref> ALLOWED_ORIGINS=http://localhost:8000
+   supabase functions deploy lookup-rsvp-invite --project-ref <staging-project-ref>
+   supabase functions deploy submit-rsvp --project-ref <staging-project-ref>
+   ```
+
+   Supabase provides `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` to Edge Functions. Do not put the service-role key in the frontend or generated files.
+
+4. Copy the local config example and set its staging project URL and publishable key. This file is ignored by Git:
+
+   ```powershell
+   Copy-Item rsvp-config.local.example.js rsvp-config.local.js
+   ```
+
+5. In one terminal, start a local static server:
+
+   ```sh
+   python -m http.server 8000
+   ```
+
+   In a second terminal, generate test links for that origin:
+
+   ```sh
+   deno run --allow-read --allow-write scripts/generate-invites.ts guest-list.csv http://localhost:8000/
+   ```
+
+   Import the generated hash-only CSV into the **staging** project's `rsvp_invites` table, then open a link from `invite-links.private.csv`.
+
+The local website loads `rsvp-config.local.js` on `localhost`; GitHub Pages loads the production `rsvp-config.js`. Do not replace the production config with staging values or commit `rsvp-config.local.js`.
+
+## Validation
+
+With Deno installed, run focused tests and type checks:
 
 ```sh
-supabase secrets set --project-ref pikqsgfoygvycghlfeii ALLOWED_ORIGINS=https://lorenzodgonzalez23-spec.github.io
-supabase functions deploy submit-rsvp --project-ref pikqsgfoygvycghlfeii
+deno test scripts/generate-invites_test.ts supabase/functions/_shared/invitations_test.ts supabase/functions/submit-rsvp/validation_test.ts
+deno check supabase/functions/lookup-rsvp-invite/index.ts supabase/functions/submit-rsvp/index.ts scripts/generate-invites.ts
+deno fmt --check scripts supabase/functions
 ```
 
+In staging, verify missing-code, valid-code, invalid/revoked-code, guest-limit, first submission, updated RSVP/history, and unavailable-backend states. Simulate a backend outage without pausing the project by using an invalid staging function URL or blocking the request, then confirm the website retains form values and does not show success.
 
-`ALLOWED_ORIGINS` takes origins only—no path or trailing slash. For local RSVP testing, add the local server origin as a comma-separated value. Local testing uses the configured Supabase project and can create real rows, so use clearly labeled test submissions.
+## Production setup
 
+The production database migrations and both Edge Functions are deployed, and `ALLOWED_ORIGINS` is configured for the live site. The invitation-aware website is not live until its reviewed changes are merged into `main` and GitHub Pages finishes publishing.
 
-The migration is in `supabase/migrations/`; the function and its validation code are in `supabase/functions/submit-rsvp/`. Supabase CLI cache files under `supabase/.temp/` are local and ignored by Git.
+To create the final invitation links:
 
+1. Prepare a private CSV with `invite_name`, `max_additional_guests`, and optional `email` columns.
+2. Generate production links from the repository root:
 
-## Review and validation
+   ```sh
+   deno run --allow-read --allow-write scripts/generate-invites.ts guest-list.csv https://enzoandkat.site/
+   ```
 
+3. Import only `invite-import.csv` into the production `rsvp_invites` table. Keep `invite-links.private.csv` secure; its links are bearer credentials.
+4. After the website update is live, test one invitation link, then send each private link only to its intended guest.
 
-To review saved submissions, open the Supabase project’s **Table Editor** and select `rsvp_submissions`. Or run this in the Supabase SQL Editor:
-
-
-```sql
-select respondent_name, attendance, additional_guest_count,
-       additional_guest_names, submitted_at
-from public.rsvp_submissions
-order by submitted_at desc
-limit 20;
-```
-
-
-The Edge Function validation tests can be run with Deno:
-
-
-```sh
-deno test supabase/functions/submit-rsvp/validation_test.ts
-deno check supabase/functions/submit-rsvp/index.ts
-deno fmt --check supabase/functions/submit-rsvp
-```
-
-
-The function returns HTTP `201` for a stored submission, `400` for invalid input, `403` for a disallowed origin, and `503` if storage is unavailable.
-
+`rsvp-config.js` contains the production function URLs and public publishable key. Never use staging configuration on the production site or commit the private invitation files.

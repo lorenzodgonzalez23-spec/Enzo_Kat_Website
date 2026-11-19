@@ -20,7 +20,7 @@
     .gallery{padding:clamp(78px,10vw,128px) 20px;background:#eeebe4;text-align:center}.gallery-head{margin-bottom:40px}.gallery-head h2{font-size:clamp(40px,6vw,68px)}.carousel{position:relative;width:min(1360px,100%);margin:auto}.frame{position:relative;overflow:hidden;background:#e4e0d7;aspect-ratio:16/10}.frame img{width:100%;height:100%;object-fit:contain;object-position:center;transition:opacity .35s ease}.control{position:absolute;top:50%;display:grid;place-items:center;width:48px;height:48px;transform:translateY(-50%);border:1px solid rgba(255,255,255,.8);border-radius:50%;background:rgba(30,30,27,.24);color:white;font-size:25px;cursor:pointer}.control:hover{background:rgba(30,30,27,.75)}.prev{left:18px}.next{right:18px}.gallery-meta{display:flex;justify-content:center;align-items:center;gap:18px;padding-top:20px}.caption{min-width:105px;color:var(--muted);font-size:9px;letter-spacing:.17em;text-transform:uppercase}.dots{display:flex;gap:8px}.dot{width:7px;height:7px;border:1px solid #68675f;border-radius:50%;padding:0;background:transparent;cursor:pointer}.dot[aria-current=true]{background:#68675f}
     .closing{position:relative;display:grid;min-height:68vh;place-items:center;overflow:hidden;padding:70px 20px;color:#fff;text-align:center;background:#555}.closing img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}.closing:after{content:'';position:absolute;inset:0;background:rgba(23,24,19,.4)}.closing-inner{position:relative;z-index:1}.closing h2{font-size:clamp(54px,10vw,112px)}.closing p:not(.label){font:italic 20px var(--serif)}
     .rsvp{padding:clamp(78px,10vw,128px) 20px;background:#000;color:#fff}.rsvp-card{width:min(680px,100%);margin:auto;padding:clamp(30px,6vw,66px);border:1px solid rgba(255,255,255,.38);text-align:center}.rsvp .label{color:#e4e0d4}.rsvp h2{font-size:clamp(40px,6vw,66px)}.rsvp-intro{margin:18px auto 30px;color:#ece9df;font:italic 17px var(--serif)}.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left}.field{display:grid;gap:8px}.field.full{grid-column:1/-1}.field label{font-size:9px;letter-spacing:.16em;text-transform:uppercase}.field input,.field select{width:100%;padding:14px;border:1px solid rgba(255,255,255,.55);border-radius:0;background:rgba(255,255,255,.96);color:var(--ink);font:14px var(--sans)}.submit{grid-column:1/-1;justify-self:center;min-width:190px;margin-top:8px;padding:15px 25px;border:1px solid white;background:transparent;color:#fff;font:500 10px var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}.submit:hover{background:#fff;color:#000}.message{grid-column:1/-1;margin:4px 0 0;font-size:13px}
-    .party-section[hidden]{display:none}.party-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}.submit:disabled{opacity:.65;cursor:wait}.message.error{color:#ffd6d6}
+    .rsvp[hidden],.nav [hidden],.party-section[hidden]{display:none}.guest-limit{margin:-16px auto 28px;color:#ece9df;font:italic 14px/1.6 var(--serif)}.party-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}.submit:disabled{opacity:.65;cursor:wait}.form.is-disabled input,.form.is-disabled select{background:#d7d4ce;color:#77766e;cursor:not-allowed}.form.is-disabled .submit{border-color:#888;color:#aaa;cursor:not-allowed}.message.error{color:#ffd6d6}
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.is-visible{opacity:1;transform:none}.story-photo.reveal,.intro-photo.reveal{transform:translateY(18px) scale(.99)}.story-photo.reveal.is-visible,.intro-photo.reveal.is-visible{transform:none}@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
     @media(max-width:700px){.topbar{padding:16px 18px}.brand img{width:82px;height:44px}.nav{gap:8px;font-size:7px}.hero{min-height:92svh}.hero-photo{object-position:center 43%}.hero h1{font-size:clamp(68px,18vw,112px)}.intro,.story{grid-template-columns:1fr}.intro-photo{min-height:0;aspect-ratio:4/3}.intro-photo img{min-height:0;object-position:center 45%}.intro-copy,.story-copy{padding:58px 27px}.date-details{gap:16px}.date-details strong{font-size:21px}.date-details span{font-size:8px}.story-photo{min-height:0;aspect-ratio:4/3;grid-row:1}.story-photo img{min-height:0;object-position:center 38%}.proposal:nth-of-type(even) .story-photo{order:0}.frame{aspect-ratio:4/3}.control{width:40px;height:40px}.prev{left:10px}.next{right:10px}.form{grid-template-columns:1fr}.field.full,.submit,.message{grid-column:1}.closing{min-height:60vh}.closing img{object-position:center 14%}}
     @media(max-width:700px){.party-fields{grid-template-columns:1fr}}
@@ -29,7 +29,7 @@
 </head>
 <body>
   <a class="skip" href="#details">Skip to wedding details</a>
-  <header class="topbar"><a class="brand" href="#top" aria-label="Enzo and Kat home"><img src="./Enzo%20%26%20Kat/Logo_Light_Transparent.png" alt="Enzo and Kat monogram"></a><nav class="nav" aria-label="Main navigation"><a href="#details">Our day</a><a href="#story">Our story</a><a href="#gallery">Gallery</a><a href="#rsvp">RSVP</a></nav></header>
+  <header class="topbar"><a class="brand" href="#top" aria-label="Enzo and Kat home"><img src="./Enzo%20%26%20Kat/Logo_Light_Transparent.png" alt="Enzo and Kat monogram"></a><nav class="nav" aria-label="Main navigation"><a href="#details">Our day</a><a href="#story">Our story</a><a href="#gallery">Gallery</a><a id="rsvpNavLink" href="#rsvp" hidden>RSVP</a></nav></header>
   <main>
     <section class="hero" id="top" aria-labelledby="hero-title"><img class="hero-photo" src="./Enzo%20%26%20Kat/Website%20Photos/Hero%20Header.JPG" alt="" fetchpriority="high"><div class="hero-content"><p class="kicker">Together with our families</p><h1 id="hero-title">Enzo<span>&amp;</span>Kat</h1><p class="hero-date">Save the date&nbsp; · &nbsp;<time datetime="2027-06-25">June 25, 2027</time></p><div class="hero-line"></div><p class="hero-sub">A day to celebrate a lifetime of love</p></div><a class="scroll" href="#details">Discover</a></section>
     <section class="intro" id="details" aria-labelledby="details-title"><div class="intro-photo reveal"><img src="./Enzo%20%26%20Kat/Website%20Photos/2nd%20photo%20save%20the%20date.JPG" alt="Enzo and Kat in their save-the-date portrait" loading="lazy"></div><div class="intro-copy reveal"><p class="label">The beginning of forever</p><h2 id="details-title">We’re getting married</h2><p class="copy">With joyful hearts, we invite you to join us as we begin our next chapter together.</p><div class="date-details"><div><strong>Friday</strong><span>Day</span></div><i class="divider" aria-hidden="true"></i><div><strong>June 25</strong><span>Date</span></div><i class="divider" aria-hidden="true"></i><div><strong>Antipolo City</strong><span>Location</span></div></div></div></section>
@@ -38,24 +38,36 @@
     <section class="story proposal" aria-labelledby="next-chapter-title"><div class="story-copy reveal"><p class="label">Our next chapter</p><h2 id="next-chapter-title">Forever starts here.</h2><p class="copy">From the proposal to the promises we’ll make, we’re so grateful to have our favorite people beside us as we begin this new chapter.</p><p class="story-mark" aria-hidden="true">✦ &nbsp; June 25, 2027 &nbsp; ✦</p></div><div class="story-photo reveal"><img src="./Enzo%20%26%20Kat/Website%20Photos/Proposal2.jpg" alt="A joyful moment after the proposal" loading="lazy"></div></section>
     <section class="gallery" id="gallery" aria-labelledby="gallery-title"><div class="gallery-head reveal"><p class="label">A moment in time</p><h2 id="gallery-title">A little glimpse of us</h2></div><div class="carousel reveal" role="region" aria-roledescription="carousel" aria-label="Enzo and Kat's photographs"><div class="frame" aria-live="polite"><img id="slide" src="./Enzo%20%26%20Kat/Website%20Photos/Carousel1.JPG" alt="Enzo and Kat, photograph one" loading="lazy"><button class="control prev" type="button" aria-label="Previous photo">‹</button><button class="control next" type="button" aria-label="Next photo">›</button></div><div class="gallery-meta"><p class="caption" id="caption">Photo 1 of 3</p><div class="dots" role="group" aria-label="Choose a photo"><button class="dot" type="button" aria-label="Show photo 1" aria-current="true"></button><button class="dot" type="button" aria-label="Show photo 2" aria-current="false"></button><button class="dot" type="button" aria-label="Show photo 3" aria-current="false"></button></div></div></div></section>
     <section class="closing" aria-label="We can't wait to celebrate"><img src="./Enzo%20%26%20Kat/Website%20Photos/End.JPG" alt="" loading="lazy"><div class="closing-inner reveal"><p class="label">June 25, 2027</p><h2>See you there</h2><p>With love, Enzo &amp; Kat</p></div></section>
-    <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title"><div class="rsvp-card reveal"><p class="label">Kindly reply</p><h2 id="rsvp-title">Will you celebrate with us?</h2><p class="rsvp-intro">We’d love to know if you can join us.</p>
+    <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title" hidden><div class="rsvp-card reveal"><p class="label">Kindly reply</p><h2 id="rsvp-title">Will you celebrate with us?</h2><p class="rsvp-intro">We’d love to know if you can join us.</p><p class="guest-limit" id="guestLimit" hidden></p>
       <form class="form" id="rsvpForm">
-        <div class="field full"><label for="guestName">Your name</label><input id="guestName" name="guestName" type="text" maxlength="120" placeholder="Enter your full name" required></div>
-        <div class="field full"><label for="attendance">Your response</label><select id="attendance" name="attendance" required><option value="">Please select</option><option value="accepts">Joyfully accepts</option><option value="declines">Regretfully declines</option></select></div>
+        <div class="field full"><label for="guestName">Your name</label><input id="guestName" name="guestName" type="text" maxlength="120" placeholder="Checking invitation…" readonly disabled></div>
+        <div class="field full"><label for="attendance">Your response</label><select id="attendance" name="attendance" required disabled><option value="">Please select</option><option value="accepts">Joyfully accepts</option><option value="declines">Regretfully declines</option></select></div>
         <div class="field full party-section" id="partySection" hidden>
           <label for="additionalGuestCount">Number of additional guests (not including you)</label>
-          <select id="additionalGuestCount" name="additionalGuestCount">
+          <select id="additionalGuestCount" name="additionalGuestCount" disabled>
             <option value="">Please select</option><option value="0">No additional guests</option><option value="1">1 additional guest</option><option value="2">2 additional guests</option><option value="3">3 additional guests</option><option value="4">4 additional guests</option><option value="5">5 additional guests</option><option value="6">6 additional guests</option>
           </select>
           <div class="party-fields" id="additionalGuestFields" aria-live="polite" aria-relevant="additions removals"></div>
         </div>
-        <button class="submit" type="submit">Send response</button>
+        <button class="submit" type="submit" disabled>Send response</button>
         <p class="message" id="message" aria-live="polite" hidden></p>
       </form>
     </div></section>
   </main>
   <footer>Enzo &amp; Kat &nbsp;·&nbsp; June 25, 2027</footer>
-  <script src="./rsvp-config.js"></script>
+  <script>
+    window.RSVP_CONFIG_READY = new Promise(resolve => {
+      const localHosts = ['localhost', '127.0.0.1'];
+      const source = localHosts.includes(window.location.hostname)
+        ? './rsvp-config.local.js'
+        : './rsvp-config.js';
+      const configScript = document.createElement('script');
+      configScript.src = source;
+      configScript.onload = () => resolve();
+      configScript.onerror = () => resolve();
+      document.head.append(configScript);
+    });
+  </script>
   <script>
     (() => {
       const photos = [
@@ -105,6 +117,12 @@
       const additionalGuestFields = document.getElementById('additionalGuestFields');
       const submitButton = form.querySelector('.submit');
       const message = document.getElementById('message');
+      const rsvpSection = document.getElementById('rsvp');
+      const rsvpNavLink = document.getElementById('rsvpNavLink');
+      const guestLimitMessage = document.getElementById('guestLimit');
+      let inviteCode = '';
+      let maxAdditionalGuests = 0;
+      let inviteIsValid = false;
 
       function renderAdditionalGuestFields() {
         const existingNames = [...additionalGuestFields.querySelectorAll('input')].map(input => input.value);
@@ -145,8 +163,16 @@
 
       attendance.addEventListener('change', updatePartyFields);
       additionalGuestCount.addEventListener('change', renderAdditionalGuestFields);
-      guestName.addEventListener('input', () => guestName.setCustomValidity(''));
       updatePartyFields();
+      form.classList.add('is-disabled');
+
+      function setFormEnabled(enabled) {
+        form.classList.toggle('is-disabled', !enabled);
+        form.querySelectorAll('input, select, button').forEach(control => {
+          control.disabled = !enabled;
+        });
+        guestName.readOnly = true;
+      }
 
       function showMessage(text, isError) {
         message.hidden = false;
@@ -155,12 +181,109 @@
         message.textContent = text;
       }
 
+      function revealRsvp() {
+        rsvpSection.hidden = false;
+        rsvpNavLink.hidden = false;
+      }
+
+      function showUnavailableMessage() {
+        revealRsvp();
+        setFormEnabled(false);
+        showMessage('We could not verify this invitation right now. Please reopen this invite link later or contact Enzo and Kat.', true);
+      }
+
+      function getInviteCodeFromUrl() {
+        const parameters = new URLSearchParams(window.location.hash.slice(1));
+        if (!parameters.has('invite')) return '';
+        return parameters.get('invite') || '';
+      }
+
+      async function postJson(url, payload, config) {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 12000);
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: config.publishableKey,
+              Authorization: `Bearer ${config.publishableKey}`
+            },
+            body: JSON.stringify(payload),
+            signal: controller.signal
+          });
+          let data = null;
+          try {
+            data = await response.json();
+          } catch {
+            // A paused or unavailable project may not return the function's JSON response.
+          }
+          return { response, data };
+        } finally {
+          window.clearTimeout(timeout);
+        }
+      }
+
+      function configureGuestLimit(limit) {
+        maxAdditionalGuests = limit;
+        [...additionalGuestCount.options].forEach(option => {
+          if (option.value !== '' && Number(option.value) > limit) option.remove();
+        });
+        guestLimitMessage.textContent = `This invitation allows up to ${limit} additional guest${limit === 1 ? '' : 's'}.`;
+        guestLimitMessage.hidden = false;
+      }
+
+      async function initializeInvitation() {
+        inviteCode = getInviteCodeFromUrl();
+        if (!inviteCode) return;
+
+        revealRsvp();
+        showMessage('Checking your invitation…', false);
+        await window.RSVP_CONFIG_READY;
+        const config = window.RSVP_CONFIG;
+        if (!config || !config.lookupFunctionUrl || !config.publishableKey ||
+            config.lookupFunctionUrl.includes('YOUR_PROJECT_REF') ||
+            config.publishableKey.includes('YOUR_SUPABASE')) {
+          showUnavailableMessage();
+          return;
+        }
+
+        try {
+          const { response, data } = await postJson(config.lookupFunctionUrl, { inviteCode }, config);
+          if (response.status === 404 && data && data.error === 'invalid_invitation') {
+            setFormEnabled(false);
+            showMessage('This invite link is invalid or no longer active. Please contact Enzo and Kat.', true);
+            return;
+          }
+          if (!response.ok || !data || typeof data.inviteName !== 'string' ||
+              !Number.isInteger(data.maxAdditionalGuests) ||
+              data.maxAdditionalGuests < 0 || data.maxAdditionalGuests > 6) {
+            showUnavailableMessage();
+            return;
+          }
+
+          guestName.value = data.inviteName;
+          configureGuestLimit(data.maxAdditionalGuests);
+          inviteIsValid = true;
+          setFormEnabled(true);
+          updatePartyFields();
+          message.hidden = true;
+        } catch (error) {
+          console.error('RSVP invitation verification failed.', error);
+          showUnavailableMessage();
+        }
+      }
+
       form.addEventListener('submit', async event => {
         event.preventDefault();
         message.hidden = true;
         message.textContent = '';
 
-        guestName.setCustomValidity(guestName.value.trim() ? '' : 'Please enter your name.');
+        if (!inviteIsValid) {
+          showMessage('This invitation is not available. Please contact Enzo and Kat.', true);
+          return;
+        }
+
         const guestNameInputs = [...additionalGuestFields.querySelectorAll('input')];
         guestNameInputs.forEach(input => input.setCustomValidity(input.value.trim() ? '' : 'Please enter this guest’s name.'));
         if (!form.reportValidity()) return;
@@ -168,42 +291,42 @@
         const config = window.RSVP_CONFIG;
         if (!config || !config.functionUrl || config.functionUrl.includes('YOUR_PROJECT_REF') ||
             !config.publishableKey || config.publishableKey.includes('YOUR_SUPABASE')) {
-          showMessage('RSVP submissions are not configured yet. Please contact Enzo and Kat directly.', true);
+          showMessage('We could not confirm your RSVP was saved. Please try again later or contact Enzo and Kat.', true);
           return;
         }
 
         const isAttending = attendance.value === 'accepts';
         const payload = {
-          respondentName: guestName.value.trim(),
+          inviteCode,
           attendance: attendance.value,
-          additionalGuestCount: isAttending ? Number(additionalGuestCount.value) : 0,
           additionalGuestNames: isAttending ? guestNameInputs.map(input => input.value.trim()) : []
         };
 
         submitButton.disabled = true;
         submitButton.textContent = 'Sending…';
         try {
-          const response = await fetch(config.functionUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              apikey: config.publishableKey,
-              Authorization: `Bearer ${config.publishableKey}`
-            },
-            body: JSON.stringify(payload)
-          });
-          if (!response.ok) throw new Error(`RSVP submission failed with status ${response.status}`);
-          showMessage('Thank you! Your RSVP has been received.', false);
-          form.reset();
-          updatePartyFields();
+          const { response, data } = await postJson(config.functionUrl, payload, config);
+          if (response.status === 404 && data && data.error === 'invalid_invitation') {
+            inviteIsValid = false;
+            setFormEnabled(false);
+            showMessage('This invite link is invalid or no longer active. Please contact Enzo and Kat.', true);
+          } else if (response.status === 400 && data && data.error === 'guest_limit_exceeded') {
+            showMessage(`This invitation allows up to ${maxAdditionalGuests} additional guest${maxAdditionalGuests === 1 ? '' : 's'}. Please adjust the number and try again.`, true);
+          } else if (!response.ok) {
+            showMessage('We could not confirm your RSVP was saved. Please try again later or contact Enzo and Kat.', true);
+          } else {
+            showMessage('Thank you! Your RSVP has been received.', false);
+          }
         } catch (error) {
           console.error('RSVP submission failed.', error);
-          showMessage('We could not save your RSVP. Please check your connection and try again.', true);
+          showMessage('We could not confirm your RSVP was saved. Please try again later or contact Enzo and Kat.', true);
         } finally {
-          submitButton.disabled = false;
+          submitButton.disabled = !inviteIsValid;
           submitButton.textContent = 'Send response';
         }
       });
+
+      void initializeInvitation();
     })();
   </script>
 </body>

@@ -1,1 +1,6 @@
 supabase/.temp/
+invite-import.csv
+invite-links.private.csv
+rsvp-config.local.js
+guest-list.csv
+staging-guests.csv
