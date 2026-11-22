@@ -151,9 +151,10 @@
 
       function updatePartyFields() {
         const attending = attendance.value === 'accepts';
-        partySection.hidden = !attending;
-        additionalGuestCount.required = attending;
-        if (!attending) {
+        const showAdditionalGuestCount = attending && maxAdditionalGuests > 0;
+        partySection.hidden = !showAdditionalGuestCount;
+        additionalGuestCount.required = showAdditionalGuestCount;
+        if (!showAdditionalGuestCount) {
           additionalGuestCount.value = '';
           additionalGuestFields.replaceChildren();
           return;
